@@ -11,16 +11,16 @@
         <h1>BMI Calculator</h1>
         <form method="POST">
             <label for="height">Height (cm)</label>
-            <input type="number" name="height-m" id="height" required><br><br>
+            <input type="number" name="height" id="height" required><br><br>
 
             <label for="weight">Weight (kg)</label>
-            <input type="number" name="weight-kg" id="weight" required><br><br>
+            <input type="number" name="weight" id="weight" required><br><br>
 
             <input type="submit" value="Calculate BMI">
         </form>
-        {% if bmi is not none %}
+        {% if bmi %}
             <h2>Your BMI is {{ bmi }}</h2>
-            <p class="{{ classy }}">{{ cat }}</p>
+            <p class="{{ classy }}">{{ category }}</p>
         {% endif %}
     </div>
     
