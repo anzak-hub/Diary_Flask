@@ -1,67 +1,103 @@
+/* styles.css */
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
     margin: 0;
     padding: 0;
+    font-family: Arial, sans-serif;
+    background: url('background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
 }
 
 .container {
-    width: 50%;
-    max-width: 500px;
-    margin: 100px auto;
-    background-color: #fff;
-    padding: 20px;
-    border: solid 1px grey;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-h1, h2 {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 40px; /* Größeres Padding für die größere Box */
+    max-width: 700px; /* Deutlich größere Box */
     text-align: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    animation: pop 0.5s ease-out;
 }
 
-form {
-    text-align: center;
+h1 {
+    font-size: 2.5em; /* Größerer Titel für die größere Box */
+    color: green; /* Grün */
+    animation: pulse 2s infinite;
 }
 
-input[type="number"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
+form label {
+    color: #87ceeb; /* Sky Blue */
+    font-size: 1.2em; /* Größere Labels */
+}
+
+form input[type="number"] {
+    padding: 10px; /* Mehr Padding für größere Felder */
+    border: 2px solid #fff;
     border-radius: 5px;
-    box-sizing: border-box;
+    margin-bottom: 15px; /* Mehr Abstand zwischen den Feldern */
+    width: 90%; /* Breitere Felder */
+    transition: 0.3s;
 }
 
-input[type="submit"] {
-    width: 100%;
-    padding: 10px;
-    background-color: #4caf50;
-    color: white;
+form input[type="number"]:focus {
+    border-color: #ff69b4; /* Pink */
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+form input[type="submit"] {
+    background-color: #32cd32; /* Lime Green */
     border: none;
+    color: #fff;
+    padding: 10px 20px; /* Größere Buttons */
     border-radius: 5px;
     cursor: pointer;
+    transition: 0.3s;
 }
 
-input[type="submit"]:hover {
-    background-color: #45a049;
+form input[type="submit"]:hover {
+    background-color: #228b22; /* Forest Green */
+}
+
+h2 {
+    color: #ffa500; /* Sanfteres Orange statt Gold */
+    text-shadow: none; /* Dezenter ohne Textschatten */
 }
 
 p {
-    text-align: center;
+    font-weight: bold;
+    color: #ff6347; /* Tomato */
+    animation: float 3s infinite;
 }
 
-.too-thin {
-    color: blue;
+@keyframes pop {
+    0% {
+        transform: scale(0.8);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 
-.normal {
-    color: green;
+@keyframes pulse {
+    0%, 100% {
+        text-shadow: 0 0 5px green, 0 0 10px green;
+    }
+    50% {
+        text-shadow: 0 0 20px green, 0 0 30px green;
+    }
 }
 
-.too-fat {
-    color: red;
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
 }
-
-
-
