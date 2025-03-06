@@ -20,6 +20,15 @@
             <!--input type="number" name="weight" id="weight" required><br><br-->
 
             <input type="submit" value="Save Diary">
+
+            <p><label for="lookForActivity">What are you looking for:</label></p>
+            <textarea id="lookForActivity" name="lookForActivity" rows="4" cols="50">Write hier which activity are you looking for.</textarea>
+
+            <!--label for="weight">Weight (kg)</label-->
+            <!--input type="number" name="weight" id="weight" required><br><br-->
+
+            <input type="submit" value="Look for activity">
+
         </form>
         {% if bmi %}
             <h2>Your BMI is {{ bmi }}</h2>
