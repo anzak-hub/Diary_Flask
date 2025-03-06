@@ -3,20 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BMI Calculator</title>
+    <title>My Diary</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <div class="container">
-        <h1>BMI Calculator</h1>
+        <h1>Diary</h1>
         <form method="POST">
-            <label for="height">Height (cm)</label>
-            <input type="number" name="height" id="height" required><br><br>
+            <!--label for="height">Height (cm)</label-->
+            <!--input type="number" name="height" id="height" required><br><br-->
 
-            <label for="weight">Weight (kg)</label>
-            <input type="number" name="weight" id="weight" required><br><br>
+            <p><label for="diaryInput">What happened today:</label></p>
+            <textarea id="diaryInput" name="diaryInput" rows="4" cols="50">Write hier what happened today.</textarea>
 
-            <input type="submit" value="Calculate BMI">
+            <!--label for="weight">Weight (kg)</label-->
+            <!--input type="number" name="weight" id="weight" required><br><br-->
+
+            <input type="submit" value="Save Diary">
         </form>
         {% if bmi %}
             <h2>Your BMI is {{ bmi }}</h2>

@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -17,12 +18,28 @@ def index():
     cat = None
     classy = None
     if request.method == 'POST':
-        height = float(request.form["height"])
-        weight = float(request.form["weight"])
-        bmi = round(weight / (height/100)**2, 2)
-        cat, classy = categorize_bmi(bmi)
+        diaryInput = request.form["diaryInput"]
+        
+        saveDiaryInputToFile(diaryInput)
     
     return render_template('index.html', bmi=bmi, category=cat, classy=classy)
+
+def saveDiaryInputToFile(text_):
+    folder_path = "diary_sites/"
+    #get current datetime
+    now = datetime.now()
+    # Format date and time as string
+    date_time_str = now.strftime("%Y-%m-%d %H-%M")
+    date_time_str = date_time_str.replace(" ", "-")
+
+    #create the file name
+    file_name = folder_path + date_time_str + ".txt"
+
+    # Open a file in write mode
+    with open(file_name, 'a') as file:          
+
+        # Write some text to the file
+        file.write(text_ + "\n")
 
 if __name__ == "__main__":
     app.run(debug=True, use_reloader=False)
