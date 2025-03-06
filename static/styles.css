@@ -9,7 +9,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    /*height: 100vh;
+    width: 100vh;*/
     color: #fff;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
 }
@@ -19,7 +20,7 @@ body {
     backdrop-filter: blur(10px);
     border-radius: 20px;
     padding: 40px; /* Größeres Padding für die größere Box */
-    max-width: 700px; /* Deutlich größere Box */
+    /*max-width: 700px; /* Deutlich größere Box */
     text-align: center;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     animation: pop 0.5s ease-out;
@@ -36,7 +37,7 @@ form label {
     font-size: 1.2em; /* Größere Labels */
 }
 
-form input[type="number"] {
+form input[type="text"] {
     padding: 10px; /* Mehr Padding für größere Felder */
     border: 2px solid #fff;
     border-radius: 5px;
@@ -45,7 +46,7 @@ form input[type="number"] {
     transition: 0.3s;
 }
 
-form input[type="number"]:focus {
+form input[type="text"]:focus {
     border-color: #ff69b4; /* Pink */
     background-color: rgba(255, 255, 255, 0.3);
 }
@@ -100,4 +101,54 @@ p {
     50% {
         transform: translateY(-5px);
     }
+}
+
+#leftsideMenu ul li {
+    border-bottom: 1px dashed lightgray;
+    background-color: cadetblue;
+    padding: 8px 20px 8px 20px;
+    color: white;
+    display: block;
+}
+  
+#leftsideMenu ul li a {
+    padding: 8px 20px 8px 20px;
+    color: white;
+    display: block;
+}
+  
+#leftsideMenu ul li:hover {
+    background-color: lightgreen;
+    transition: 0.5s;
+    padding-left: 30px;
+    padding-right: 10px;
+}
+
+#leftsideMenu ul li.selected {
+    background-color: lightgreen;
+    transition: 0.5s;
+    padding-left: 30px;
+    padding-right: 10px;
+}
+
+#leftsideMenu ul li:focus {
+    background: lightgreen;
+  }
+
+#leftsideMenu ul li.selected {
+    background: lightgreen;
+}
+
+#leftsideMenu ul{
+    width: 12em;
+    height: 20em;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+#diaryInput{
+    width: 12em;
+    height: 20em;
+    overflow: scroll;
+    overflow-x: hidden;
 }

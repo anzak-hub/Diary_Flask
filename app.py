@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from datetime import datetime
+import os
 
 app = Flask(__name__)
 
@@ -14,15 +15,74 @@ def categorize_bmi(bmi):
 # Definere den Pfad für die Home Page
 @app.route('/', methods=["GET", "POST"])
 def index():
-    bmi = None
-    cat = None
-    classy = None
     if request.method == 'POST':
-        diaryInput = request.form["diaryInput"]
+
+        save_button_pressed = request.form.get("save") #if the save button was pressed
+        search_button_pressed = request.form.get("search") #if the save button was pressed
         
-        saveDiaryInputToFile(diaryInput)
+        if save_button_pressed is not None:
+            diaryInput = request.form["diaryInput"]
+            
+            saveDiaryInputToFile(diaryInput)
+
+        elif search_button_pressed is not None:
+            wordToSearch = request.form["wordToSearch"]
+            print("\n Serach button pressed", wordToSearch)
+            searchFilesForWord(wordToSearch)
+
+        
+
+    files_list = get_all_tagebuch_inputs()
+    return render_template('index.html', files=files_list, message = "Enter what happend today")
+
+@app.route('/selected-item', methods=["GET", 'POST'])
+def selected_item():
+    print(request.method)
+    data = request.get_json()
+    selected_item = data.get('selectedItem')
+    print(f'Selected item: {selected_item}')
+    return render_template('index.html', message = "After selected")
+    return jsonify({'status': 'success', 'selectedItem': selected_item})
+
+@app.route('/doubleclick/<int:item_id>', methods=["GET", "POST"])
+def handle_doubleclick(item_id):
+    data = request.get_json()
+    print(data)
+    # Process the double-click event here
+    #item = items.get(item_id)
+    print(f"Item {data['id']}  {data["selectedItem"]}was double-clicked!")
+    return render_template('index.html', message = data["selectedItem"])
+    return jsonify({"message": f"Item {data['id']} was double-clicked!"})
+
+def searchFilesForWord(wordToSearch):
+    folder_path = "diary_sites/"
     
-    return render_template('index.html', bmi=bmi, category=cat, classy=classy)
+    files_with_text = []
+
+    files = get_all_tagebuch_inputs()
+    for file_name in files:
+        file_name = folder_path + file_name
+        with open(file_name, 'r') as file:          
+
+            for line in file:
+                print("line", line, line.find(wordToSearch))
+                if line.find(wordToSearch) != -1:
+                    #the word is in the file
+                    files_with_text.append(file_name)
+                    break
+    for file in files_with_text:
+        print("\n\n", file)
+
+
+def get_all_tagebuch_inputs():
+        folder_path = "diary_sites/"
+        # List all files in the specified folder
+        files = os.listdir(folder_path)
+
+        for file_name in files:
+            print(file_name)
+        
+        return files
 
 def saveDiaryInputToFile(text_):
     folder_path = "diary_sites/"

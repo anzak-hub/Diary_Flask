@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Diary</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="{{url_for('static', filename='javascriptfile.js')}}"></script>
 </head>
 <body>
     <div class="container">
@@ -12,19 +13,33 @@
         <form method="POST">
             <!--label for="height">Height (cm)</label-->
             <!--input type="number" name="height" id="height" required><br><br-->
+            
+            <section>
+                <div id="leftsideMenu" name="comp_select" class="items">
+                    <ul style="list-style-type:none", class="files_names_list">
+                        {% for file in files %}
+                            <li class="file_name"  tabindex="1" ondblclick = "handleDoubleClick('{{ loop.index }}')">
+                                "{{file}}"
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
 
-            <p><label for="diaryInput">What happened today:</label></p>
-            <textarea id="diaryInput" name="diaryInput" rows="4" cols="50">Write hier what happened today.</textarea>
-
+                <p><label for="diaryInput">What happened today:</label></p>
+                <textarea id="diaryInput" name="diaryInput" rows="4" cols="50">{{ message }}</textarea>
+            </section>
             <!--label for="weight">Weight (kg)</label-->
             <!--input type="number" name="weight" id="weight" required><br><br-->
 
-            <input type="submit" value="Save Diary">
+            <input type="submit" name="save" value="Save Diary">
+
+            <label>
+                <p>Please enter a word to search</p>
+                <input type="text" id="wordToSearch" name="wordToSearch" maxlength="20">
+            </label>
+            <input type="submit" name="search" value="Search"> 
         </form>
-        {% if bmi %}
-            <h2>Your BMI is {{ bmi }}</h2>
-            <p class="{{ classy }}">{{ category }}</p>
-        {% endif %}
+        
     </div>
     
 </body>
