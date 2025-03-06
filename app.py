@@ -50,8 +50,12 @@ def handle_doubleclick(item_id):
     print(data)
     # Process the double-click event here
     #item = items.get(item_id)
-    print(f"Item {data['id']}  {data["selectedItem"]}was double-clicked!")
-    return render_template('index.html', message = data["selectedItem"])
+    print(f"Item {data['id']}  {data['selectedItem']}was double-clicked!")
+    
+    message_ = readFile(data["selectedItem"].replace("\"",""))
+    print("THE message is", message_)
+    
+    return render_template('index.html', message = message_)
     return jsonify({"message": f"Item {data['id']} was double-clicked!"})
 
 def searchFilesForWord(wordToSearch):
@@ -73,6 +77,16 @@ def searchFilesForWord(wordToSearch):
     for file in files_with_text:
         print("\n\n", file)
 
+def readFile(file_name):
+    folder_path = "diary_sites/"
+    file_name = folder_path + file_name
+
+    file_text = ""
+    with open(file_name, 'r') as file:          
+
+            for line in file:
+                file_text += line
+    return file_text
 
 def get_all_tagebuch_inputs():
         folder_path = "diary_sites/"
