@@ -13,7 +13,7 @@ def index():
         
         saveDiaryInputToFile(diaryInput)
         
-        LookForActivity = request.form["lookForActivity"]
+        lookForActivity = request.form["lookForActivity"]
         
         findTheActivity(lookForActivity)
         
