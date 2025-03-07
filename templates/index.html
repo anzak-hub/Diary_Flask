@@ -6,6 +6,7 @@
     <title>My Diary</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
+
 <body>
     <div class="container">
         <h1>Diary</h1>
@@ -20,13 +21,29 @@
             <textarea id="lookForActivity" name="lookForActivity" rows="4" cols="50">Write hier which activity are you looking for.</textarea>
 
             <input type="submit" value="findTheActivity">
-
         </form>
-        {% if bmi %}
-            <h2>Your BMI is {{ bmi }}</h2>
-            <p class="{{ classy }}">{{ category }}</p>
-        {% endif %}
-    </div>
+
+    </div>  
+    <div class="container container2">
+    {% if today %}
+        
+        <h2>Diary's Inputs: {{ today }}</h2>
     
+    {% endif %}       
+    </div>
+
+    <div class="container container3">
+
+    {% if activities %}
+     
+        {% for a in activities %}
+        
+            <h2>Activity done: {{ a }}</h2>
+        
+        {% endfor %}
+    
+    {% endif %} 
+    
+</div> 
 </body>
 </html>
