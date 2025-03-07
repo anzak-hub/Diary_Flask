@@ -6,25 +6,80 @@ body {
     font-family: Arial, sans-serif;
     background: url('background.jpg') no-repeat center center fixed;
     background-size: cover;
-    display: flex;
+    text-align: center;
+    /*display: flex;
     justify-content: center;
     align-items: center;
-    /*height: 100vh;
+    height: 100vh;
     width: 100vh;*/
     color: #fff;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
 }
+.items { grid-area: a;}
+.divDiaryInput { grid-area: b;}
+.save { grid-area: d;
+    align-self: center;}
+.divLabelSearch { grid-area: e;}
+.search { grid-area: f;
+    align-self: center;}
 
-.container {
+.grid-container {
+    display: grid;
+    grid-template-areas:
+        "a a b b b b"
+        "a a b b b b"
+        "a a b b b b"
+        "a a . d d ."
+        "e e e f f .";
+    grid-gap: 10px;
     background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(10px);
     border-radius: 20px;
     padding: 40px; /* Größeres Padding für die größere Box */
     /*max-width: 700px; /* Deutlich größere Box */
-    text-align: center;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     animation: pop 0.5s ease-out;
+    transition: 0.3s;
+    
+    background-color: transparent;
+    
 }
+
+.grid-container > div{
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    padding: 20px 0;
+    font-size: 30px;
+}
+
+.divDiaryInput {
+    position: relative;
+    margin: 20px 0;
+    background: rgba(0, 0, 0, .01);
+    backdrop-filter: blur(10px);
+    
+}
+
+.divDiaryInput label {
+    position: absolute;
+    top: -20px;
+    left: 0;
+    font-size: 14px;
+    color: #87ceeb; 
+}
+
+.divLabelSearch {
+    margin: 20px 0;
+    transition: 0.3s;
+    background-color: rgba(255, 0, 0, 0.4);
+    background:none
+}
+
+.divLabelSearch label {
+    font-size: 14px;
+    color: #87ceeb; 
+}
+
 
 h1 {
     font-size: 2.5em; /* Größerer Titel für die größere Box */
@@ -32,26 +87,26 @@ h1 {
     animation: pulse 2s infinite;
 }
 
-form label {
+.grid-container label {
     color: #87ceeb; /* Sky Blue */
     font-size: 1.2em; /* Größere Labels */
 }
 
-form input[type="text"] {
+.grid-container input[type="text"] {
     padding: 10px; /* Mehr Padding für größere Felder */
     border: 2px solid #fff;
     border-radius: 5px;
     margin-bottom: 15px; /* Mehr Abstand zwischen den Feldern */
-    width: 90%; /* Breitere Felder */
+   /* width: 90%;  Breitere Felder */
     transition: 0.3s;
 }
 
-form input[type="text"]:focus {
+.grid-container input[type="text"]:focus {
     border-color: #ff69b4; /* Pink */
     background-color: rgba(255, 255, 255, 0.3);
 }
 
-form input[type="submit"] {
+.grid-container input[type="submit"] {
     background-color: #32cd32; /* Lime Green */
     border: none;
     color: #fff;
@@ -61,7 +116,7 @@ form input[type="submit"] {
     transition: 0.3s;
 }
 
-form input[type="submit"]:hover {
+.grid-container input[type="submit"]:hover {
     background-color: #228b22; /* Forest Green */
 }
 
@@ -140,15 +195,22 @@ p {
 }
 
 #leftsideMenu ul{
-    width: 12em;
-    height: 20em;
+    /*width: 12em;
+    height: 20em;*/
     overflow: scroll;
     overflow-x: hidden;
 }
 
 #diaryInput{
-    width: 12em;
-    height: 20em;
+    /*width: 12em;
+    height: 20em;*/
     overflow: scroll;
     overflow-x: hidden;
+    background-color: transparent;
+}
+
+#diaryInput textarea{
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
 }

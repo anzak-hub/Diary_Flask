@@ -8,40 +8,45 @@
     <script src="{{url_for('static', filename='javascriptfile.js')}}"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>Diary</h1>
-        <form method="POST">
+    
+    <h1>Diary</h1>
+    <form method="POST"></form>
+        <div class="grid-container">
+        
             <!--label for="height">Height (cm)</label-->
             <!--input type="number" name="height" id="height" required><br><br-->
             
-            <section>
-                <div id="leftsideMenu" name="comp_select" class="items">
-                    <ul style="list-style-type:none", class="files_names_list">
-                        {% for file in files %}
-                            <li class="file_name"  tabindex="1" ondblclick = "handleDoubleClick('{{ loop.index }}')">
+         
+            <div id="leftsideMenu" name="comp_select" class="items">
+                <ul style="list-style-type:none", class="files_names_list">
+                    {% for file in files %}
+                        <li class="file_name"  tabindex="1" ondblclick = "handleDoubleClick(event);">
                                 "{{file}}"
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
 
-                <p><label for="diaryInput">What happened today:</label></p>
-                <textarea id="diaryInput" name="diaryInput" rows="4" cols="50">{{ message }}</textarea>
-            </section>
+            <div id="divDiaryInput" name="divDiaryInput" class="divDiaryInput">
+                <label for="diaryInput" id="label1" class="label1">What happened today:</label>
+                <textarea id="diaryInput" class="textArea" name="diaryInput" rows="44" cols="50">{{ message }}</textarea>
+            </div>
+           
             <!--label for="weight">Weight (kg)</label-->
             <!--input type="number" name="weight" id="weight" required><br><br-->
 
         
-            <input type="submit" name="save" value="Save Diary">
+            <input type="submit" name="save" class="save" id="save" value="Save Diary">
 
-            <label>
-                <p>Please enter a word to search</p>
+            <div id="divLabelSearch" name="divLabelSearch" class="divLabelSearch">
+                <label for="wordToSearch" id="labelSearch" class="labelSearch" >Please enter a word to search</label>
                 <input type="text" id="wordToSearch" name="wordToSearch" maxlength="20">
-            </label>
-            <input type="submit" name="search" value="Search"> 
-        </form>
-        
-    </div>
+            </div>
+            <input type="submit" name="search" class="search" id="search" value="Search"> 
+            
+
+        </div>
+    </form>
     
 </body>
 </html>

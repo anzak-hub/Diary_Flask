@@ -44,8 +44,8 @@ def selected_item():
     return render_template('index.html', message = "After selected")
     return jsonify({'status': 'success', 'selectedItem': selected_item})
 
-@app.route('/doubleclick/<int:item_id>', methods=["GET", "POST"])
-def handle_doubleclick(item_id):
+@app.route('/doubleclick', methods=["GET", "POST"])
+def handle_doubleclick():
     data = request.get_json()
     print(data)
     # Process the double-click event here

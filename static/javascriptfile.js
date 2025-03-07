@@ -23,22 +23,23 @@ function handleClick(event) {
 document.addEventListener('DOMContentLoaded', () => {
     const listItems = document.querySelectorAll('li');
     listItems.forEach(item => {
-        item.addEventListener('click', handleClick);
+        //item.addEventListener('click', handleClick);
+        item.addEventListener('dblclick', handleDoubleClick);
     });
 });
 
-function handleDoubleClick(itemId) {
-    fetch(`/doubleclick/${itemId}`, {
+function handleDoubleClick(event) {
+    fetch(`/doubleclick`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ id: itemId , selectedItem: event.target.innerText})
+        body: JSON.stringify({ id: event.target.id , selectedItem: event.target.innerText})
     })
     .then(response => response.json())
     .then(data => {
         console.log('Success:', data);
-        alert(`Item ${itemId} was double-clicked!`);
+        alert(`Item ${event.target.id} was double-clicked!`);
     })
     .catch((error) => {
         console.error('Error:', error);
