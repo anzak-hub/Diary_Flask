@@ -19,6 +19,7 @@ def index():
 
         save_button_pressed = request.form.get("save") #if the save button was pressed
         search_button_pressed = request.form.get("search") #if the save button was pressed
+        print("Pressedf", save_button_pressed, search_button_pressed, request.form.values())
         
         if save_button_pressed is not None:
             diaryInput = request.form["diaryInput"]
@@ -26,9 +27,14 @@ def index():
             saveDiaryInputToFile(diaryInput)
 
         elif search_button_pressed is not None:
+            print("Search bitton is pressed")
             wordToSearch = request.form["wordToSearch"]
             print("\n Serach button pressed", wordToSearch)
-            searchFilesForWord(wordToSearch)
+            files_list = searchFilesForWord(wordToSearch)
+            print("\n\nFiles")
+            for file in files_list:
+                print("\n\n", file)
+            return render_template('index.html', files=files_list, message = "Enter what happend today")
 
         
 
@@ -74,8 +80,8 @@ def searchFilesForWord(wordToSearch):
                     #the word is in the file
                     files_with_text.append(file_name)
                     break
-    for file in files_with_text:
-        print("\n\n", file)
+    
+    return files_with_text
 
 def readFile(file_name):
     folder_path = "diary_sites/"
