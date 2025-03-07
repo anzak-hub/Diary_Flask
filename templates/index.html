@@ -10,13 +10,9 @@
 <body>
     
     <h1>Diary</h1>
-    <form method="POST"></form>
+    <form method="POST">
         <div class="grid-container">
-        
-            <!--label for="height">Height (cm)</label-->
-            <!--input type="number" name="height" id="height" required><br><br-->
-            
-         
+
             <div id="leftsideMenu" name="comp_select" class="items">
                 <ul style="list-style-type:none", class="files_names_list">
                     {% for file in files %}
@@ -31,10 +27,6 @@
                 <label for="diaryInput" id="label1" class="label1">What happened today:</label>
                 <textarea id="diaryInput" class="textArea" name="diaryInput" rows="44" cols="50">{{ message }}</textarea>
             </div>
-           
-            <!--label for="weight">Weight (kg)</label-->
-            <!--input type="number" name="weight" id="weight" required><br><br-->
-
         
             <input type="submit" name="save" class="save" id="save" value="Save Diary"/>
 

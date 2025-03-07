@@ -1,16 +1,8 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, make_response
 from datetime import datetime
 import os
 
 app = Flask(__name__)
-
-def categorize_bmi(bmi):
-    if bmi < 18.5:
-        return "you are underweight - eat more!", "too-thin"
-    elif bmi < 25:
-        return "you have normal weight - keep on going!", "normal"
-    else:
-        return "you are overweight - eat less and move more!", "too-fat"
 
 # Definere den Pfad für die Home Page
 @app.route('/', methods=["GET", "POST"])
@@ -31,9 +23,6 @@ def index():
             wordToSearch = request.form["wordToSearch"]
             print("\n Serach button pressed", wordToSearch)
             files_list = searchFilesForWord(wordToSearch)
-            print("\n\nFiles")
-            for file in files_list:
-                print("\n\n", file)
             return render_template('index.html', files=files_list, message = "Enter what happend today")
 
         
@@ -47,7 +36,7 @@ def selected_item():
     data = request.get_json()
     selected_item = data.get('selectedItem')
     print(f'Selected item: {selected_item}')
-    return render_template('index.html', message = "After selected")
+    #return render_template('index.html', message = "After selected")
     return jsonify({'status': 'success', 'selectedItem': selected_item})
 
 @app.route('/doubleclick', methods=["GET", "POST"])
@@ -61,8 +50,9 @@ def handle_doubleclick():
     message_ = readFile(data["selectedItem"].replace("\"",""))
     print("THE message is", message_)
     
-    return render_template('index.html', message = message_)
-    return jsonify({"message": f"Item {data['id']} was double-clicked!"})
+    return make_response(render_template('index.html', message = message_, foo=42))
+    #return render_template('index.html', message = message_)
+    #return jsonify({"message": f"Item {data['id']} was double-clicked!"})
 
 def searchFilesForWord(wordToSearch):
     folder_path = "diary_sites/"
@@ -71,8 +61,8 @@ def searchFilesForWord(wordToSearch):
 
     files = get_all_tagebuch_inputs()
     for file_name in files:
-        file_name = folder_path + file_name
-        with open(file_name, 'r') as file:          
+        #file_name = folder_path + file_name
+        with open((folder_path + file_name), 'r') as file:          
 
             for line in file:
                 print("line", line, line.find(wordToSearch))
@@ -95,14 +85,14 @@ def readFile(file_name):
     return file_text
 
 def get_all_tagebuch_inputs():
-        folder_path = "diary_sites/"
-        # List all files in the specified folder
-        files = os.listdir(folder_path)
+    folder_path = "diary_sites/"
+    # List all files in the specified folder
+    files = os.listdir(folder_path)
 
-        for file_name in files:
-            print(file_name)
+    for file_name in files:
+        print(file_name)
         
-        return files
+    return files
 
 def saveDiaryInputToFile(text_):
     folder_path = "diary_sites/"
