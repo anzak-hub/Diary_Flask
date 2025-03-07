@@ -10,24 +10,16 @@
     <div class="container">
         <h1>Diary</h1>
         <form method="POST">
-            <!--label for="height">Height (cm)</label-->
-            <!--input type="number" name="height" id="height" required><br><br-->
 
             <p><label for="diaryInput">What happened today:</label></p>
             <textarea id="diaryInput" name="diaryInput" rows="4" cols="50">Write hier what happened today.</textarea>
-
-            <!--label for="weight">Weight (kg)</label-->
-            <!--input type="number" name="weight" id="weight" required><br><br-->
 
             <input type="submit" value="Save Diary">
 
             <p><label for="lookForActivity">What are you looking for:</label></p>
             <textarea id="lookForActivity" name="lookForActivity" rows="4" cols="50">Write hier which activity are you looking for.</textarea>
 
-            <!--label for="weight">Weight (kg)</label-->
-            <!--input type="number" name="weight" id="weight" required><br><br-->
-
-            <input type="submit" value="Look for activity">
+            <input type="submit" value="findTheActivity">
 
         </form>
         {% if bmi %}

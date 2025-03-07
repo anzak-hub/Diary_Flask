@@ -11,11 +11,13 @@ def index():
         
         diaryInput = request.form["diaryInput"]
         
-        saveDiaryInputToFile(diaryInput)
-        
         lookForActivity = request.form["lookForActivity"]
         
-        findTheActivity(lookForActivity)
+        if diaryInput:
+            saveDiaryInputToFile(diaryInput)  
+            
+        if lookForActivity:
+            findTheActivity(lookForActivity)
         
     return render_template('index.html')      
 
@@ -35,31 +37,25 @@ def saveDiaryInputToFile(text_):
 
 def findTheActivity(activity):
     
-    directory = "/diarysites"
+    directory = "diary_sites/"
     
     # Find all the files
     file_list = os.listdir(directory)
     
-    #List of activities that have been done
-    foundActivities = []
+    activities = []
     
     #for each file a string of activities that has to be searched trough
     for f in file_list:
-        
-        activities = ""
-        
-        with open(f, 'r') as file:
-            lines = file.readline()
-            
+ 
+        with open(directory + f, 'r') as file:
+            lines = file.readlines()
             for line in lines:
-                activities += line
-                
-            if activity in activities:
-                foundActivities.append(activity, "datum:" f"{f}".strip(".txt"))
-    
-    return foundActivities       
-                                   
-
+                if line != " ":
+                    activities.append((f.strip(".txt"), line.strip()))
+    return activities
+    # for a in activities:
+    #     if activity in a[1]:
+    #         print(a[0])
+              
 if __name__ == "__main__":
     app.run(debug=True, use_reloader=False)
-    print("Success!")
